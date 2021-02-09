@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Unsplash from '../Api/Unsplash';
+import Unsplash from "../Api/Unsplash";
+import ImageList from "./ImageList";
 import SearchBar from "./SearchBar";
 
 class App extends Component {
@@ -8,7 +9,6 @@ class App extends Component {
   onSearchSubmit = async (term) => {
     const response = await Unsplash.get("/search/photos", {
       params: { query: term },
-      
     });
 
     this.setState({ images: response.data.results });
@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <div className="ui container" style={{ marginTop: "10px" }}>
         <SearchBar ReturnValue={this.onSearchSubmit} />
-        Found: {this.state.images.length} images
+        <ImageList images={this.state.images} />
       </div>
     );
   }
